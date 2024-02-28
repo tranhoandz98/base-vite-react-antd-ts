@@ -1,7 +1,7 @@
 import { Layout } from 'antd'
 import MenuNav from '../MenuNav'
 import { useContext, useState } from 'react'
-import { ThemeContext } from '~/context/theme.context'
+import { ThemeContext } from '@/context/theme.context'
 const { Sider } = Layout
 
 export default function SideNav() {

@@ -1,11 +1,11 @@
-import { routerMain } from '~/constants/routerMain'
-import MainLayout from '~/layouts/MainLayout'
-import Blog from '~/pages/Blog'
-import Home from '~/pages/Home'
+import { routerMain } from '@/constants/routerMain'
+import MainLayout from '@/layouts/MainLayout'
+import Blog from '@/pages/Blog'
+import Home from '@/pages/Home'
 import ProtectedRoute from './ProtectedRoute'
 import RejectedRoute from './RejectedRoute'
-import Login from '~/pages/Login'
-import RegisterLayout from '~/layouts/RegisterLayout'
+import Login from '@/pages/Login'
+import RegisterLayout from '@/layouts/RegisterLayout'
 
 export const routers = [
   {

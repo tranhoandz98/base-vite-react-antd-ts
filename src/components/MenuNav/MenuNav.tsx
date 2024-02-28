@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
 import { type MenuProps, type MenuTheme } from 'antd'
-import { ThemeContext } from '~/context/theme.context'
+import { ThemeContext } from '@/context/theme.context'
 import { Menu, Switch } from 'antd'
 type MenuItem = Required<MenuProps>['items'][number]
 
