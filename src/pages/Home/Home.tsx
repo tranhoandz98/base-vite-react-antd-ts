@@ -1,31 +1,28 @@
-import { Breadcrumb } from 'antd'
-import React from 'react'
+import { PageContainer, ProCard } from '@ant-design/pro-components'
+import { Button } from 'antd'
 
 export default function Home() {
   return (
     <div>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-      </Breadcrumb>
-      <div className='bg-white'>
-        <div
+      <PageContainer
+        token={{}}
+        extra={[
+          <Button key='3'>Test</Button>,
+          <Button key='1' type='primary'>
+            Add
+          </Button>
+        ]}
+        subTitle='simple description'
+      >
+        <ProCard
           style={{
-            padding: 24,
-            textAlign: 'center'
+            height: '80vh',
+            minHeight: 800
           }}
         >
-          <p>long content</p>
-          {
-            // indicates very long content
-            Array.from({ length: 100 }, (_, index) => (
-              <React.Fragment key={index}>
-                {index % 20 === 0 && index ? 'more' : '...'}
-                <br />
-              </React.Fragment>
-            ))
-          }
-        </div>
-      </div>
+          Home
+        </ProCard>
+      </PageContainer>
     </div>
   )
 }

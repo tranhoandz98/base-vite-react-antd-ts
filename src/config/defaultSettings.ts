@@ -16,7 +16,7 @@ const defaultSettings: ProLayoutProps & {
   fixedHeader: true,
   fixSiderbar: true,
   colorWeak: true,
-  title: '',
+  title: 'React Base',
   pwa: true,
   logo: logoVite,
   // logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',

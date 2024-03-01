@@ -1,13 +1,14 @@
-import { NavThemeProps } from '@/types/theme.type'
+import { NavThemeDropdownProps } from '@/types/theme.type'
+import { getThemeFromLS, setThemeToLs } from '@/utils/utils'
 import React, { createContext, useState } from 'react'
 
 interface ThemeContextInterface {
-  themeBase: NavThemeProps
-  setThemeBase: React.Dispatch<React.SetStateAction<NavThemeProps>>
+  themeBase: NavThemeDropdownProps
+  setThemeBase: React.Dispatch<React.SetStateAction<NavThemeDropdownProps>>
 }
 
 const initialThemeContext: ThemeContextInterface = {
-  themeBase: 'light',
+  themeBase: getThemeFromLS(),
   setThemeBase: () => null
 }
 
@@ -15,22 +16,34 @@ export const ThemeContext = createContext(initialThemeContext)
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   // setState
-  const [themeBase, setThemeBase] = useState<NavThemeProps>(initialThemeContext.themeBase)
+  const [themeBase, setThemeBase] = useState<NavThemeDropdownProps>(initialThemeContext.themeBase)
 
-  const rawSetTheme = (rawTheme: string) => {
+  const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const rawSetTheme = (rawTheme: NavThemeDropdownProps) => {
     const root = window.document.documentElement
-    const isDark = rawTheme === 'realDark'
-    const twDark = rawTheme === 'realDark' ? 'dark' : rawTheme
+
+    let theme = rawTheme
+    if (rawTheme === 'system') {
+      if (userPrefersDark) {
+        theme = 'realDark'
+      } else {
+        theme = 'light'
+      }
+    }
+    const isDark = theme === 'realDark'
+    const twClassDark = theme === 'realDark' ? 'dark' : theme
 
     root.classList.remove(isDark ? 'light' : 'dark')
-    root.classList.add(twDark)
+    root.classList.add(twClassDark)
 
-    localStorage.setItem('color-theme', twDark)
+    setThemeToLs(theme)
+    localStorage.setItem('color-theme', theme)
   }
 
   React.useEffect(() => {
     rawSetTheme(themeBase)
-  }, [themeBase])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [themeBase, userPrefersDark])
 
   return <ThemeContext.Provider value={{ themeBase, setThemeBase }}>{children}</ThemeContext.Provider>
 }
