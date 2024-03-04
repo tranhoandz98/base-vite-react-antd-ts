@@ -10,14 +10,11 @@ module.exports = {
     'eslint-config-prettier',
     'prettier'
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.js'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh','prettier'],
+  plugins: ['react-refresh', 'prettier'],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'prettier/prettier': [
       'warn',
       {
@@ -32,5 +29,5 @@ module.exports = {
         jsxSingleQuote: true
       }
     ]
-  },
+  }
 }

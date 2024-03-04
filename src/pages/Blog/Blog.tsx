@@ -1,9 +1,9 @@
 import { PageContainer, ProCard } from '@ant-design/pro-components'
 import { Button } from 'antd'
-import Datatable from './components/Datatable'
+import { useTranslation } from 'react-i18next'
 
 export default function Blog() {
-  // const [num, setNum] = useState(10)
+  const { t } = useTranslation()
 
   return (
     <div>
@@ -14,6 +14,7 @@ export default function Blog() {
             Add
           </Button>
         ]}
+        title={t('menu.blog')}
         subTitle='simple description'
         footer={[
           <Button key='3'>Back</Button>,
@@ -22,14 +23,7 @@ export default function Blog() {
           </Button>
         ]}
       >
-        <ProCard
-          style={{
-            height: '80vh',
-            minHeight: 800
-          }}
-        >
-          <Datatable />
-        </ProCard>
+        <ProCard className='min-h-[500px] h-[50vh]'>{t('menu.blog')}</ProCard>
       </PageContainer>
     </div>
   )

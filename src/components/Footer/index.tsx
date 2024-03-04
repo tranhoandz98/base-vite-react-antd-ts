@@ -10,20 +10,20 @@ const Footer: React.FC = () => {
       //   }}
       prefixCls=''
       copyright='tranhoandz99'
-    //   links={[
-    //     {
-    //       key: 'github',
-    //       title: <GithubOutlined />,
-    //       href: 'https://github.com/tranhoandz98',
-    //       blankTarget: true
-    //     },
-    //     {
-    //       key: 'tranhoandz98',
-    //       title: 'tranhoandz98',
-    //       href: 'https://github.com/tranhoandz98',
-    //       blankTarget: true
-    //     }
-    //   ]}
+      //   links={[
+      //     {
+      //       key: 'github',
+      //       title: <GithubOutlined />,
+      //       href: 'https://github.com/tranhoandz98',
+      //       blankTarget: true
+      //     },
+      //     {
+      //       key: 'tranhoandz98',
+      //       title: 'tranhoandz98',
+      //       href: 'https://github.com/tranhoandz98',
+      //       blankTarget: true
+      //     }
+      //   ]}
     />
   )
 }

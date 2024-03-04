@@ -1,7 +1,7 @@
 export const routerMain = {
   LOGIN: '/login',
   HOME: '/',
-  DASHBROAD: '/dashbroad',
+  DASHBOARD: '/dashboard',
   BLOG: '/blog',
   ADMIN: '/admin',
   ADMIN_SUB: '/admin/:sub',

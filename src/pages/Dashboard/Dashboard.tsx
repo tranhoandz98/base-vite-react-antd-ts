@@ -18,7 +18,7 @@ export default function Dashboard() {
         title={t('menu.dashboard')}
         subTitle='simple description'
       >
-        <ProCard className='min-h-[800px] h-[80vh] dark:text-red-800'>{t('menu.dashboard')}</ProCard>
+        <ProCard className='min-h-[500px] h-[50vh]'>{t('menu.dashboard')}</ProCard>
       </PageContainer>
     </div>
   )

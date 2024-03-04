@@ -1,10 +1,10 @@
-import global_en from '../locales/en-US.ts'
-import global_vi from '../locales/vi-VN.ts'
+import global_en from './locales/en-US.ts'
+import global_vi from './locales/vi-VN.ts'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import viVNIntl from 'antd/lib/locale/vi_VN'
+import detector from 'i18next-browser-languagedetector'
 import enUSIntl from 'antd/lib/locale/en_US'
-import LanguageDetector from 'i18next-browser-languagedetector'
 
 export const locales = {
   en: 'English',
@@ -27,8 +27,8 @@ export const resources = {
 export const defaultNS = 'global'
 
 i18n
+  .use(detector)
   .use(initReactI18next)
-  .use(LanguageDetector)
   .init({
     detection: {
       // Order and from where user language should be detected
@@ -53,7 +53,7 @@ i18n
       // htmlTag: document.documentElement
     },
     interpolation: { escapeValue: false },
-    lng: 'vi',
+    // lng: 'vi',
     fallbackLng: 'vi',
     defaultNS,
     nsSeparator: false,

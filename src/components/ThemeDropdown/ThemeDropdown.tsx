@@ -44,7 +44,6 @@ export default function ThemeDropdown() {
 
   const changeTheme = (value: NavThemeProps) => {
     const itemTheme = items.find((itemT) => itemT?.key === value) as ThemeItemProps
-    console.log('itemTheme: ', itemTheme)
     setThemeDropdown(itemTheme)
     setThemeBase(value)
   }

@@ -24,7 +24,7 @@ type GithubIssueItem = {
 const columns: ProColumns<GithubIssueItem>[] = [
   {
     dataIndex: 'index',
-    valueType: 'indexBorder',
+    valueType: 'index',
     width: 48,
     title: '#',
     fixed: 'left'
@@ -477,9 +477,6 @@ const columns: ProColumns<GithubIssueItem>[] = [
       >
         edit
       </a>,
-      <a href={record.url} target='_blank' rel='noopener noreferrer' key='view'>
-        Check
-      </a>,
       <TableDropdown
         key='actionGroup'
         onSelect={() => action?.reload()}
@@ -498,14 +495,14 @@ export default function Datatable() {
     <ProTable<GithubIssueItem>
       columns={columns}
       actionRef={actionRef}
-      cardBordered
+      // cardBordered
       bordered
       rowSelection={{
         selections: [Table.SELECTION_ALL, Table.SELECTION_NONE],
         defaultSelectedRowKeys: []
       }}
       request={async (params, sort, filter) => {
-        console.log(sort, filter)
+        console.log('sort: ', { sort, filter })
         const res = await axios.get('https://proapi.azurewebsites.net/github/issues', {
           params
         })
@@ -540,8 +537,8 @@ export default function Datatable() {
         layout: 'vertical'
       }}
       pagination={{
-        pageSize: 5,
-        onChange: (page) => console.log(page),
+        pageSize: 5
+        // onChange: (page) => console.log(page)
         // showTotal: (total, range) => (
         //   <div>
         //     <span>
@@ -553,8 +550,7 @@ export default function Datatable() {
       ghost={true}
       dateFormatter='string'
       headerTitle='Advanced forms'
-      tableAlertRender={({ selectedRowKeys, selectedRows, onCleanSelected }) => {
-        console.log(selectedRowKeys, selectedRows)
+      tableAlertRender={({ selectedRowKeys, onCleanSelected }) => {
         return (
           <Space size={24}>
             <span>

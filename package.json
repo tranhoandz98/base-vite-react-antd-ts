@@ -14,7 +14,6 @@
     "pwa-gen-img": "pwa-asset-generator ./public/vite.svg ./public -s false"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.3.0",
     "@ant-design/pro-components": "^2.6.49",
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.24.1",

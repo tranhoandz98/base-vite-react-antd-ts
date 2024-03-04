@@ -47,46 +47,12 @@ export default function useRouterElements() {
               )
             },
             {
-              path: routerMain.DASHBROAD,
+              path: routerMain.DASHBOARD,
               element: (
                 <Suspense>
                   <Dashboard />
                 </Suspense>
               )
-            },
-            {
-              path: routerMain.ADMIN,
-              children: [
-                {
-                  path: routerMain.ADMIN_SUB,
-                  element: (
-                    <Suspense>
-                      <Blog />
-                    </Suspense>
-                  )
-                }
-              ]
-            },
-            {
-              path: routerMain.LIST,
-              children: [
-                {
-                  path: routerMain.LIST_SUB,
-                  element: (
-                    <Suspense>
-                      <Blog />
-                    </Suspense>
-                  )
-                },
-                {
-                  path: routerMain.LIST_SUB_SUB,
-                  element: (
-                    <Suspense>
-                      <Blog />
-                    </Suspense>
-                  )
-                }
-              ]
             },
             {
               path: routerMain.COMPONENT,
