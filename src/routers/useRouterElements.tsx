@@ -9,7 +9,7 @@ import ComponentCs from '@/pages/ComponentCs'
 
 export default function useRouterElements() {
   const Login = lazy(() => import('@/pages/Login'))
-  const Home = lazy(() => import('@/pages/Home'))
+  const Dashboard = lazy(() => import('@/pages/Dashboard'))
   const Blog = lazy(() => import('@/pages/Blog'))
   const Page404 = lazy(() => import('@/pages/Errors/Page404'))
 
@@ -50,7 +50,7 @@ export default function useRouterElements() {
               path: routerMain.DASHBROAD,
               element: (
                 <Suspense>
-                  <Home />
+                  <Dashboard />
                 </Suspense>
               )
             },
@@ -106,7 +106,7 @@ export default function useRouterElements() {
               index: true,
               element: (
                 <Suspense>
-                  <Home />
+                  <Dashboard />
                 </Suspense>
               )
             }

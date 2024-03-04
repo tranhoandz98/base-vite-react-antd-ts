@@ -8,7 +8,11 @@ import { ProLayout } from '@ant-design/pro-components'
 import { ConfigProvider, Dropdown, Input } from 'antd'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import defaultProps from './_defaultProps'
+import LangDropdown from '@/components/LangDropdown'
+import { ChromeFilled, CrownFilled, FileOutlined, HomeOutlined, TabletOutlined, TagOutlined } from '@ant-design/icons'
+import { routerMain } from '@/constants/routerMain'
+import { useTranslation } from 'react-i18next'
+import { locales } from '@/i18n/i18n'
 
 const filterByMenuData = (data: MenuDataItem[], keyWord: string): MenuDataItem[] =>
   data
@@ -31,6 +35,10 @@ const filterByMenuData = (data: MenuDataItem[], keyWord: string): MenuDataItem[]
 //   }))
 
 export default function MainLayout() {
+  const { t } = useTranslation()
+  const { i18n } = useTranslation()
+  const currentLanguage = locales[i18n.language as keyof typeof locales]
+
   const actionRef = useRef<{
     reload: () => void
   }>()
@@ -38,16 +46,133 @@ export default function MainLayout() {
   const { themeBase } = useContext(ThemeContext)
   const [keyWord, setKeyWord] = useState('')
   const [pathname, setPathname] = useState('/')
+  const defaultMenu = [
+    {
+      path: routerMain.DASHBROAD,
+      name: t('menu.dashboard'),
+      icon: <HomeOutlined />
+    },
+    {
+      path: routerMain.BLOG,
+      name: t('menu.blog'),
+      icon: <FileOutlined />
+    },
+    {
+      path: routerMain.ADMIN,
+      name: 'Management page',
+      icon: <TabletOutlined />,
+      access: 'canAdmin',
+      component: './Admin',
+      local: 'managementPage',
+      routes: [
+        {
+          path: '/admin/sub-page1',
+          name: 'First level page',
+          icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
+          component: './Welcome'
+        },
+        {
+          path: '/admin/sub-page2',
+          name: 'secondary page',
+          icon: <CrownFilled />,
+          component: './Welcome'
+        },
+        {
+          path: '/admin/sub-page3',
+          name: 'Third level page',
+          icon: <CrownFilled />,
+          component: './Welcome'
+        }
+      ]
+    },
+    {
+      name: 'Component',
+      icon: <TagOutlined />,
+      path: routerMain.COMPONENT,
+      routes: [
+        {
+          path: `${routerMain.COMPONENT}/form`,
+          name: 'Form',
+          icon: <CrownFilled />,
+          component: './Welcome'
+        },
+        {
+          path: `${routerMain.COMPONENT}/modal`,
+          name: 'modal',
+          icon: <CrownFilled />,
+          component: './Welcome'
+        },
+        {
+          path: `${routerMain.COMPONENT}/skeleton`,
+          name: 'skeleton',
+          subName: 'sekekekeke',
+          icon: <CrownFilled />,
+          component: './Welcome'
+        }
+      ]
+    },
+    {
+      name: 'List',
+      icon: <TagOutlined />,
+      path: routerMain.LIST,
+      routes: [
+        {
+          path: '/list/form',
+          name: 'List 1.1',
+          icon: <CrownFilled />,
+          routes: [
+            {
+              path: 'sub-sub-page1',
+              name: 'First level list page',
+              icon: <CrownFilled />,
+              component: './Welcome'
+            },
+            {
+              path: 'sub-sub-page2',
+              name: 'First and second level list pages',
+              icon: <CrownFilled />,
+              component: './Welcome'
+            },
+            {
+              path: 'sub-sub-page3',
+              name: 'First and third level list pages',
+              icon: <CrownFilled />,
+              component: './Welcome'
+            }
+          ]
+        },
+        {
+          path: '/list/sub-page2',
+          name: 'Secondary list page',
+          icon: <CrownFilled />,
+          component: './Welcome'
+        },
+        {
+          path: '/list/sub-page3',
+          name: 'Level 3 list page',
+          icon: <CrownFilled />,
+          component: './Welcome'
+        }
+      ]
+    },
+    {
+      path: 'https://ant.design',
+      name: 'Ant Design Official website external link',
+      icon: <ChromeFilled />
+    }
+  ]
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [menuData, setMenuData] = useState<any[]>([])
 
   useEffect(() => {
     waitTime()
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLanguage])
 
   const waitTime = (time: number = 100) => {
     setTimeout(() => {
-      setMenuData(defaultProps.route.routes)
+      setMenuData(defaultMenu)
     }, time)
   }
 
@@ -55,17 +180,8 @@ export default function MainLayout() {
     return <div />
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, react-hooks/rules-of-hooks
-  // const serviceData: any[] = useMemo<any[]>(() => defaultProps.route.routes, [])
-
   return (
-    <div
-    // id='test-pro-layout'
-    // style={{
-    //   height: '100vh',
-    //   overflow: 'auto'
-    // }}
-    >
+    <div>
       <ConfigProvider
         getTargetContainer={() => {
           return document.getElementById('test-pro-layout') || document.body
@@ -146,7 +262,7 @@ export default function MainLayout() {
           actionsRender={() => {
             // if (props.isMobile) return []
             // if (typeof window === 'undefined') return []
-            return [<ThemeDropdown />]
+            return [<LangDropdown />, <ThemeDropdown />]
           }}
           headerTitleRender={(logo, title, _) => {
             const defaultDom = (
