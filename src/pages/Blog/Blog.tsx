@@ -1,5 +1,6 @@
 import { PageContainer, ProCard } from '@ant-design/pro-components'
 import { Button } from 'antd'
+import Datatable from './components/Datatable'
 
 export default function Blog() {
   // const [num, setNum] = useState(10)
@@ -27,8 +28,7 @@ export default function Blog() {
             minHeight: 800
           }}
         >
-          blog
-          <div />
+          <Datatable />
         </ProCard>
       </PageContainer>
     </div>

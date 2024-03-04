@@ -4,7 +4,7 @@ import { ThemeContext } from '@/context/theme.context'
 import { NavThemeProps } from '@/types/theme.type'
 import { LogoutOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
 import type { MenuDataItem } from '@ant-design/pro-components'
-import { ProConfigProvider, ProLayout } from '@ant-design/pro-components'
+import { ProLayout } from '@ant-design/pro-components'
 import { ConfigProvider, Dropdown, Input } from 'antd'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
@@ -66,159 +66,157 @@ export default function MainLayout() {
     //   overflow: 'auto'
     // }}
     >
-      <ProConfigProvider hashed={false}>
-        <ConfigProvider
-          getTargetContainer={() => {
-            return document.getElementById('test-pro-layout') || document.body
+      <ConfigProvider
+        getTargetContainer={() => {
+          return document.getElementById('test-pro-layout') || document.body
+        }}
+      >
+        <ProLayout
+          {...defaultSettings}
+          layout='mix'
+          navTheme={themeBase as NavThemeProps}
+          prefixCls='my-prefix'
+          actionRef={actionRef}
+          bgLayoutImgList={[
+            {
+              src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
+              left: 85,
+              bottom: 100,
+              height: '303px'
+            },
+            {
+              src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
+              bottom: -68,
+              right: -45,
+              height: '303px'
+            },
+            {
+              src: 'https://img.alicdn.com/imgextra/i3/O1CN018NxReL1shX85Yz6Cx_!!6000000005798-2-tps-884-496.png',
+              bottom: 0,
+              left: 0,
+              width: '331px'
+            }
+          ]}
+          // {...defaultProps}
+          location={{
+            pathname
           }}
-        >
-          <ProLayout
-            {...defaultSettings}
-            layout='mix'
-            navTheme={themeBase as NavThemeProps}
-            prefixCls='my-prefix'
-            actionRef={actionRef}
-            bgLayoutImgList={[
-              {
-                src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
-                left: 85,
-                bottom: 100,
-                height: '303px'
-              },
-              {
-                src: 'https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png',
-                bottom: -68,
-                right: -45,
-                height: '303px'
-              },
-              {
-                src: 'https://img.alicdn.com/imgextra/i3/O1CN018NxReL1shX85Yz6Cx_!!6000000005798-2-tps-884-496.png',
-                bottom: 0,
-                left: 0,
-                width: '331px'
-              }
-            ]}
-            // {...defaultProps}
-            location={{
-              pathname
-            }}
-            token={{
-              header: {
-                colorBgMenuItemSelected: 'rgba(0,0,0,0.04)'
-              }
-            }}
-            menu={{
-              collapsedShowGroupTitle: true
-            }}
-            avatarProps={{
-              src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-              size: 'small',
-              // title: '',
-              render: (_, dom) => {
-                return (
-                  <Dropdown
-                    menu={{
-                      items: [
-                        {
-                          key: 'user',
-                          label: 'Admin'
-                        },
-                        {
-                          type: 'divider'
-                        },
-                        {
-                          key: 'profile',
-                          icon: <UserOutlined />,
-                          label: 'Profile'
-                        },
-                        {
-                          key: 'logout',
-                          icon: <LogoutOutlined />,
-                          label: 'Logout'
-                        }
-                      ]
-                    }}
-                  >
-                    {dom}
-                  </Dropdown>
-                )
-              }
-            }}
-            actionsRender={() => {
-              // if (props.isMobile) return []
-              // if (typeof window === 'undefined') return []
-              return [<ThemeDropdown />]
-            }}
-            headerTitleRender={(logo, title, _) => {
-              const defaultDom = (
-                <a>
-                  {logo}
-                  {title}
-                </a>
-              )
-              if (typeof window === 'undefined') return defaultDom
-              if (document.body.clientWidth < 1400) {
-                return defaultDom
-              }
-              if (_.isMobile) return defaultDom
-              return <>{defaultDom}</>
-            }}
-            menuFooterRender={(props) => {
-              if (props?.collapsed) return undefined
+          token={{
+            header: {
+              colorBgMenuItemSelected: 'rgba(0,0,0,0.04)'
+            }
+          }}
+          menu={{
+            collapsedShowGroupTitle: true
+          }}
+          avatarProps={{
+            src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
+            size: 'small',
+            // title: '',
+            render: (_, dom) => {
               return (
-                <div
-                  style={{
-                    textAlign: 'center',
-                    paddingBlockStart: 12
+                <Dropdown
+                  menu={{
+                    items: [
+                      {
+                        key: 'user',
+                        label: 'Admin'
+                      },
+                      {
+                        type: 'divider'
+                      },
+                      {
+                        key: 'profile',
+                        icon: <UserOutlined />,
+                        label: 'Profile'
+                      },
+                      {
+                        key: 'logout',
+                        icon: <LogoutOutlined />,
+                        label: 'Logout'
+                      }
+                    ]
                   }}
                 >
-                  <div>© 2024 Made with love</div>
-                  <div>by tranhoandz98</div>
-                </div>
-              )
-            }}
-            menuItemRender={(item, dom) => {
-              return (
-                <div
-                  onClick={() => {
-                    setPathname(item.path || '/')
-                  }}
-                >
-                  <Link to={item.path as string}>{dom}</Link>
-                </div>
-              )
-            }}
-            menuExtraRender={({ collapsed }) =>
-              !collapsed && (
-                <>
-                  <Input
-                    style={{
-                      borderRadius: 4,
-                      backgroundColor: 'rgba(0,0,0,0.03)'
-                    }}
-                    prefix={
-                      <SearchOutlined
-                        style={{
-                          color: 'rgba(0, 0, 0, 0.15)'
-                        }}
-                      />
-                    }
-                    placeholder='Search'
-                    variant='borderless'
-                    onPressEnter={(e) => {
-                      setKeyWord((e.target as HTMLInputElement).value)
-                    }}
-                  />
-                </>
+                  {dom}
+                </Dropdown>
               )
             }
-            menuDataRender={() => menuData}
-            postMenuData={(menus) => filterByMenuData(menus || [], keyWord)}
-          >
-            <Outlet></Outlet>
-          </ProLayout>
-        </ConfigProvider>
-      </ProConfigProvider>
+          }}
+          actionsRender={() => {
+            // if (props.isMobile) return []
+            // if (typeof window === 'undefined') return []
+            return [<ThemeDropdown />]
+          }}
+          headerTitleRender={(logo, title, _) => {
+            const defaultDom = (
+              <a>
+                {logo}
+                {title}
+              </a>
+            )
+            if (typeof window === 'undefined') return defaultDom
+            if (document.body.clientWidth < 1400) {
+              return defaultDom
+            }
+            if (_.isMobile) return defaultDom
+            return <>{defaultDom}</>
+          }}
+          menuFooterRender={(props) => {
+            if (props?.collapsed) return undefined
+            return (
+              <div
+                style={{
+                  textAlign: 'center',
+                  paddingBlockStart: 12
+                }}
+              >
+                <div>© 2024 Made with love</div>
+                <div>by tranhoandz98</div>
+              </div>
+            )
+          }}
+          menuItemRender={(item, dom) => {
+            return (
+              <div
+                onClick={() => {
+                  setPathname(item.path || '/')
+                }}
+              >
+                <Link to={item.path as string}>{dom}</Link>
+              </div>
+            )
+          }}
+          menuExtraRender={({ collapsed }) =>
+            !collapsed && (
+              <>
+                <Input
+                  style={{
+                    borderRadius: 4,
+                    backgroundColor: 'rgba(0,0,0,0.03)'
+                  }}
+                  prefix={
+                    <SearchOutlined
+                      style={{
+                        color: 'rgba(0, 0, 0, 0.15)'
+                      }}
+                    />
+                  }
+                  placeholder='Search'
+                  variant='borderless'
+                  onPressEnter={(e) => {
+                    setKeyWord((e.target as HTMLInputElement).value)
+                  }}
+                />
+              </>
+            )
+          }
+          menuDataRender={() => menuData}
+          postMenuData={(menus) => filterByMenuData(menus || [], keyWord)}
+        >
+          <Outlet></Outlet>
+        </ProLayout>
+      </ConfigProvider>
     </div>
   )
 }

@@ -1,15 +1,17 @@
 import { routerMain } from '@/constants/routerMain'
 import MainLayout from '@/layouts/MainLayout'
 import RegisterLayout from '@/layouts/RegisterLayout'
-import Blog from '@/pages/Blog'
-import Page404 from '@/pages/Errors/Page404'
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
 import { useRoutes } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import RejectedRoute from './RejectedRoute'
+import { Suspense, lazy } from 'react'
 
 export default function useRouterElements() {
+  const Login = lazy(() => import('@/pages/Login'))
+  const Home = lazy(() => import('@/pages/Home'))
+  const Blog = lazy(() => import('@/pages/Blog'))
+  const Page404 = lazy(() => import('@/pages/Errors/Page404'))
+
   const routeElements = useRoutes([
     {
       path: '',
@@ -19,7 +21,9 @@ export default function useRouterElements() {
           path: routerMain.LOGIN,
           element: (
             <RegisterLayout>
-              <Login />
+              <Suspense>
+                <Login />
+              </Suspense>
             </RegisterLayout>
           )
         }
@@ -35,40 +39,62 @@ export default function useRouterElements() {
           children: [
             {
               path: routerMain.BLOG,
-              element: <Blog />
+              element: (
+                <Suspense>
+                  <Blog />
+                </Suspense>
+              )
             },
             {
               path: routerMain.DASHBROAD,
-              element: <Home />
+              element: (
+                <Suspense>
+                  <Home />
+                </Suspense>
+              )
             },
             {
               path: routerMain.ADMIN,
-              element: <Blog />,
               children: [
                 {
                   path: routerMain.ADMIN_SUB,
-                  element: <Blog />
+                  element: (
+                    <Suspense>
+                      <Blog />
+                    </Suspense>
+                  )
                 }
               ]
             },
             {
               path: routerMain.LIST,
-              element: <Blog />,
               children: [
                 {
                   path: routerMain.LIST_SUB,
-                  element: <Blog />
+                  element: (
+                    <Suspense>
+                      <Blog />
+                    </Suspense>
+                  )
                 },
                 {
                   path: routerMain.LIST_SUB_SUB,
-                  element: <Blog />
+                  element: (
+                    <Suspense>
+                      <Blog />
+                    </Suspense>
+                  )
                 }
               ]
             },
             {
               path: routerMain.HOME,
               index: true,
-              element: <Home />
+              element: (
+                <Suspense>
+                  <Home />
+                </Suspense>
+              )
             }
           ]
         }
@@ -76,7 +102,11 @@ export default function useRouterElements() {
     },
     {
       path: '*',
-      element: <Page404 />
+      element: (
+        <Suspense>
+          <Page404 />
+        </Suspense>
+      )
     }
   ])
 
