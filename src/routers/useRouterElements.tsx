@@ -5,6 +5,7 @@ import { useRoutes } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import RejectedRoute from './RejectedRoute'
 import { Suspense, lazy } from 'react'
+import ComponentCs from '@/pages/ComponentCs'
 
 export default function useRouterElements() {
   const Login = lazy(() => import('@/pages/Login'))
@@ -82,6 +83,19 @@ export default function useRouterElements() {
                   element: (
                     <Suspense>
                       <Blog />
+                    </Suspense>
+                  )
+                }
+              ]
+            },
+            {
+              path: routerMain.COMPONENT,
+              children: [
+                {
+                  path: routerMain.COMPONENT_SUB,
+                  element: (
+                    <Suspense>
+                      <ComponentCs />
                     </Suspense>
                   )
                 }

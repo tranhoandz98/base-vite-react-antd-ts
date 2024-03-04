@@ -539,28 +539,16 @@ export default function Datatable() {
         labelWrap: true,
         layout: 'vertical'
       }}
-      // form={{
-      //   // Since transform is configured, the submitted participation is different from the definition and needs to be transformed here.
-      //   syncToUrl: (values, type) => {
-      //     if (type === 'get') {
-      //       return {
-      //         ...values,
-      //         created_at: [values.startTime, values.endTime]
-      //       }
-      //     }
-      //     return values
-      //   }
-      // }}
       pagination={{
         pageSize: 5,
         onChange: (page) => console.log(page),
-        showTotal: (total, range) => (
-          <div>
-            <span>
-              Show <b>{range[0]}</b> to <b>{range[1]}</b> in <b>{total}</b>
-            </span>
-          </div>
-        )
+        // showTotal: (total, range) => (
+        //   <div>
+        //     <span>
+        //       Show <b>{range[0]}</b> to <b>{range[1]}</b> in <b>{total}</b>
+        //     </span>
+        //   </div>
+        // )
       }}
       ghost={true}
       dateFormatter='string'
@@ -575,14 +563,6 @@ export default function Datatable() {
                 cancel selection
               </Button>
             </span>
-          </Space>
-        )
-      }}
-      tableAlertOptionRender={() => {
-        return (
-          <Space size={16}>
-            <Button>batch deletion</Button>
-            <Button>export data</Button>
           </Space>
         )
       }}

@@ -1,3 +1,4 @@
+import { routerMain } from '@/constants/routerMain'
 import { ChromeFilled, CrownFilled, FileOutlined, HomeOutlined, TabletOutlined, TagOutlined } from '@ant-design/icons'
 
 export default {
@@ -5,17 +6,17 @@ export default {
     path: '/',
     routes: [
       {
-        path: '/dashbroad',
+        path: routerMain.DASHBROAD,
         name: 'Dashbroad',
         icon: <HomeOutlined />
       },
       {
-        path: '/blog',
+        path: routerMain.BLOG,
         name: 'Blog',
         icon: <FileOutlined />
       },
       {
-        path: '/admin',
+        path: routerMain.ADMIN,
         name: 'Management page',
         icon: <TabletOutlined />,
         access: 'canAdmin',
@@ -42,14 +43,39 @@ export default {
         ]
       },
       {
-        name: 'List',
+        name: 'Component',
         icon: <TagOutlined />,
-        path: '/list',
-        component: './ListTableList',
+        path: routerMain.COMPONENT,
         routes: [
           {
-            path: '/list/sub-page',
-            name: 'List page',
+            path: `${routerMain.COMPONENT}/form`,
+            name: 'Form',
+            icon: <CrownFilled />,
+            component: './Welcome'
+          },
+          {
+            path: `${routerMain.COMPONENT}/modal`,
+            name: 'modal',
+            icon: <CrownFilled />,
+            component: './Welcome'
+          },
+          {
+            path: `${routerMain.COMPONENT}/skeleton`,
+            name: 'skeleton',
+            subName: 'sekekekeke',
+            icon: <CrownFilled />,
+            component: './Welcome'
+          }
+        ]
+      },
+      {
+        name: 'List',
+        icon: <TagOutlined />,
+        path: routerMain.LIST,
+        routes: [
+          {
+            path: '/list/form',
+            name: 'List 1.1',
             icon: <CrownFilled />,
             routes: [
               {
