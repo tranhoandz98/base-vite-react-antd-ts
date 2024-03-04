@@ -41,7 +41,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     rawSetTheme(themeBase)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [themeBase])
 
   return <ThemeContext.Provider value={{ themeBase, setThemeBase }}>{children}</ThemeContext.Provider>
