@@ -1,0 +1,37 @@
+{
+	"name": "antd | Vite + React + TS",
+	"short_name": "antd base",
+	"description": "Base react antd vite ts.",
+	"icons": [
+		{
+			"src": "/manifest-icon-192.maskable.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "monochrome"
+		},
+		{
+			"src": "/manifest-icon-512.maskable.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/apple-icon-180.png",
+			"sizes": "180x180",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/vite.svg",
+			"sizes": "32x32",
+			"type": "image/svg+xml",
+			"purpose": "maskable"
+		}
+	],
+	"theme_color": "#171717",
+	"background_color": "#e8ebf2",
+	"display": "standalone",
+	"scope": "/",
+	"start_url": "/",
+	"orientation": "portrait"
+}

@@ -1,9 +1,12 @@
 import { PageContainer, ProCard } from '@ant-design/pro-components'
 import { Button } from 'antd'
-import Datatable from './components/Datatable'
+import DemoForm from './components/DemoForm'
+import { useParams } from 'react-router-dom'
 
-export default function Blog() {
+export default function ComponentCs() {
   // const [num, setNum] = useState(10)
+  const { sub } = useParams()
+  console.log('sub: ', sub)
 
   return (
     <div>
@@ -15,20 +18,9 @@ export default function Blog() {
           </Button>
         ]}
         subTitle='simple description'
-        footer={[
-          <Button key='3'>Back</Button>,
-          <Button key='2' type='primary'>
-            Save
-          </Button>
-        ]}
       >
-        <ProCard
-          style={{
-            height: '80vh',
-            minHeight: 800
-          }}
-        >
-          <Datatable />
+        <ProCard>
+          <DemoForm />
         </ProCard>
       </PageContainer>
     </div>

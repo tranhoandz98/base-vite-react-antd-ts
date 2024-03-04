@@ -1,16 +1,18 @@
-// import User from '~/types/user.type'
+// import User from '@/types/user.type'
 
 export const setAccessTokenToLS = (access_token: string) => {
   return localStorage.setItem('access_token', access_token)
 }
 
 export const getAccessTokenFromLS = () => {
-  return localStorage.getItem('access_token') || ''
+  // return localStorage.getItem('access_token') || ''
+  return true
 }
 
 export const clearAuthFromLS = () => {
   localStorage.removeItem('profile')
-  return localStorage.removeItem('access_token')
+  localStorage.removeItem('access_token')
+  return
 }
 
 export const getProfileFromLS = () => {

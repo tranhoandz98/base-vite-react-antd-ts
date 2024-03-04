@@ -1,18 +1,19 @@
-import { ConfigProvider } from 'antd'
-import vi_VN from 'antd/locale/vi_VN'
-import React from 'react'
-import App from './App'
-import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
-import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { AppProvider } from './context/app.context'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ConfigProvider } from 'antd'
+import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App'
+import { AppProvider } from './context/app.context'
 import { ThemeProvider } from './context/theme.context'
+import viVNIntl from 'antd/lib/locale/vi_VN'
 
 const WrapApp: React.FC = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } }
   })
+
   return (
     <ErrorBoundary>
       <BrowserRouter basename='/'>
@@ -22,9 +23,10 @@ const WrapApp: React.FC = () => {
               <ConfigProvider
                 theme={{
                   token: {},
-                  cssVar: true
+                  cssVar: true,
+                  hashed: false
                 }}
-                locale={vi_VN}
+                locale={viVNIntl}
               >
                 <App />
               </ConfigProvider>
