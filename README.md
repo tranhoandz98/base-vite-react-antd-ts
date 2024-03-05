@@ -30,6 +30,7 @@ Dự án dựa trên một số thư viện cần thiết sau:
 19. [react-router-dom](https://reactrouter.com/web/guides/quick-start): Thư viện điều hướng cho ứng dụng web đơn trang (SPA) sử dụng React.
 20. [yup](https://github.com/jquense/yup): Thư viện giúp tạo ra các schema để kiểm tra dữ liệu.
 21. [dayjs](https://day.js.org/): Đây là một thư viện JavaScript tối giản dành cho các trình duyệt hiện đại với API tương thích với Moment.js. Nếu bạn sử dụng Moment.js, bạn đã biết cách sử dụng Day.js. Kích thước chỉ 2KB (đã được nén) nhưng có một loạt các tính năng rộng lớn cho việc phân tích, xác thực, thao tác và hiển thị ngày và thời gian.
+22. [react-toastify](https://www.npmjs.com/package/react-toastify): Là một thư viện React giúp bạn tạo ra các thông báo toast một cách dễ dàng và tiện lợi. Thư viện hỗ trợ nhiều tùy chọn để tùy chỉnh thông báo toast và cung cấp API dễ sử dụng, giúp bạn xây dựng trải nghiệm người dùng mượt mà.
 ## DevDependencies
 1. [@types/dompurify](https://www.npmjs.com/package/@types/dompurify): Cung cấp các định nghĩa kiểu TypeScript cho thư viện DOMPurify.
 2. [@types/lodash](https://www.npmjs.com/package/@types/lodash): Cung cấp định nghĩa kiểu TypeScript cho thư viện Lodash.
