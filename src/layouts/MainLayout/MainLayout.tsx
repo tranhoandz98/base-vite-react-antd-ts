@@ -1,23 +1,31 @@
+import LangDropdown from '@/components/LangDropdown'
 import ThemeDropdown from '@/components/ThemeDropdown'
 import defaultSettings from '@/config/defaultSettings'
+import { routerMain } from '@/constants/routerMain'
 import { ThemeContext } from '@/context/theme.context'
+import { locales } from '@/i18n/i18n'
 import { NavThemeProps } from '@/types/theme.type'
-import { LogoutOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
+import {
+  ChromeFilled,
+  CrownFilled,
+  FileOutlined,
+  HomeOutlined,
+  LogoutOutlined,
+  SearchOutlined,
+  TagOutlined,
+  UserOutlined
+} from '@ant-design/icons'
 import type { MenuDataItem } from '@ant-design/pro-components'
 import { ProLayout } from '@ant-design/pro-components'
 import { ConfigProvider, Dropdown, Input } from 'antd'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import LangDropdown from '@/components/LangDropdown'
-import { ChromeFilled, CrownFilled, FileOutlined, HomeOutlined, TabletOutlined, TagOutlined } from '@ant-design/icons'
-import { routerMain } from '@/constants/routerMain'
 import { useTranslation } from 'react-i18next'
-import { locales } from '@/i18n/i18n'
+import { Link, Outlet } from 'react-router-dom'
 
-const filterByMenuData = (data: MenuDataItem[], keyWord: string): MenuDataItem[] =>
-  data
+const filterByMenuData = (data: MenuDataItem[], keyWord: string): MenuDataItem[] => {
+  return data
     .map((item) => {
-      if (item.name?.includes(keyWord)) {
+      if (item.name?.toLowerCase().includes(keyWord.toLowerCase())) {
         return { ...item }
       }
       const children = filterByMenuData(item.children || [], keyWord)
@@ -27,7 +35,7 @@ const filterByMenuData = (data: MenuDataItem[], keyWord: string): MenuDataItem[]
       return undefined
     })
     .filter((item) => item) as MenuDataItem[]
-
+}
 // const loopMenuItem = (menus: any[]): MenuDataItem[] =>
 //   menus.map(({ icon, routes, ...item }) => ({
 //     ...item,
@@ -35,20 +43,15 @@ const filterByMenuData = (data: MenuDataItem[], keyWord: string): MenuDataItem[]
 //   }))
 
 export default function MainLayout() {
-  const { t } = useTranslation()
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation('')
   const currentLanguage = locales[i18n.language as keyof typeof locales]
-
   const actionRef = useRef<{
     reload: () => void
   }>()
 
-  const { themeBase } = useContext(ThemeContext)
-  const [keyWord, setKeyWord] = useState('')
-  const [pathname, setPathname] = useState('/')
   const defaultMenu = [
     {
-      path: routerMain.DASHBROAD,
+      path: routerMain.DASHBOARD,
       name: t('menu.dashboard'),
       icon: <HomeOutlined />
     },
@@ -58,100 +61,63 @@ export default function MainLayout() {
       icon: <FileOutlined />
     },
     {
-      path: routerMain.ADMIN,
-      name: 'Management page',
-      icon: <TabletOutlined />,
-      access: 'canAdmin',
-      component: './Admin',
-      local: 'managementPage',
-      routes: [
-        {
-          path: '/admin/sub-page1',
-          name: 'First level page',
-          icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-          component: './Welcome'
-        },
-        {
-          path: '/admin/sub-page2',
-          name: 'secondary page',
-          icon: <CrownFilled />,
-          component: './Welcome'
-        },
-        {
-          path: '/admin/sub-page3',
-          name: 'Third level page',
-          icon: <CrownFilled />,
-          component: './Welcome'
-        }
-      ]
-    },
-    {
-      name: 'Component',
+      name: t('menu.component'),
       icon: <TagOutlined />,
       path: routerMain.COMPONENT,
       routes: [
         {
           path: `${routerMain.COMPONENT}/form`,
-          name: 'Form',
-          icon: <CrownFilled />,
-          component: './Welcome'
+          name: t('menu.form'),
+          icon: <CrownFilled />
+        },
+        {
+          path: `${routerMain.COMPONENT}/table`,
+          name: t('menu.table'),
+          icon: <CrownFilled />
         },
         {
           path: `${routerMain.COMPONENT}/modal`,
-          name: 'modal',
-          icon: <CrownFilled />,
-          component: './Welcome'
+          name: t('menu.modal'),
+          icon: <CrownFilled />
         },
         {
           path: `${routerMain.COMPONENT}/skeleton`,
-          name: 'skeleton',
-          subName: 'sekekekeke',
-          icon: <CrownFilled />,
-          component: './Welcome'
+          name: t('menu.skeleton'),
+          icon: <CrownFilled />
         }
       ]
     },
     {
-      name: 'List',
+      name: 'Menu 1',
       icon: <TagOutlined />,
-      path: routerMain.LIST,
       routes: [
         {
-          path: '/list/form',
-          name: 'List 1.1',
+          name: 'Menu 1.1',
           icon: <CrownFilled />,
           routes: [
             {
-              path: 'sub-sub-page1',
-              name: 'First level list page',
-              icon: <CrownFilled />,
-              component: './Welcome'
+              name: 'Menu 1.1.1',
+              icon: <CrownFilled />
             },
             {
-              path: 'sub-sub-page2',
-              name: 'First and second level list pages',
-              icon: <CrownFilled />,
-              component: './Welcome'
+              name: 'Menu 1.1.2',
+              icon: <CrownFilled />
             },
             {
-              path: 'sub-sub-page3',
-              name: 'First and third level list pages',
-              icon: <CrownFilled />,
-              component: './Welcome'
+              name: 'Menu 1.1.3',
+              icon: <CrownFilled />
             }
           ]
         },
         {
           path: '/list/sub-page2',
           name: 'Secondary list page',
-          icon: <CrownFilled />,
-          component: './Welcome'
+          icon: <CrownFilled />
         },
         {
           path: '/list/sub-page3',
           name: 'Level 3 list page',
-          icon: <CrownFilled />,
-          component: './Welcome'
+          icon: <CrownFilled />
         }
       ]
     },
@@ -161,6 +127,10 @@ export default function MainLayout() {
       icon: <ChromeFilled />
     }
   ]
+
+  const { themeBase } = useContext(ThemeContext)
+  const [keyWord, setKeyWord] = useState('')
+  const [pathname, setPathname] = useState('/')
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [menuData, setMenuData] = useState<any[]>([])
@@ -189,9 +159,9 @@ export default function MainLayout() {
       >
         <ProLayout
           {...defaultSettings}
-          layout='mix'
           navTheme={themeBase as NavThemeProps}
           prefixCls='my-prefix'
+          layout='mix'
           actionRef={actionRef}
           bgLayoutImgList={[
             {
@@ -244,12 +214,12 @@ export default function MainLayout() {
                       {
                         key: 'profile',
                         icon: <UserOutlined />,
-                        label: 'Profile'
+                        label: t('menu.profile')
                       },
                       {
                         key: 'logout',
                         icon: <LogoutOutlined />,
-                        label: 'Logout'
+                        label: t('menu.logout')
                       }
                     ]
                   }}
@@ -259,10 +229,10 @@ export default function MainLayout() {
               )
             }
           }}
-          actionsRender={() => {
+          actionsRender={(props) => {
             // if (props.isMobile) return []
             // if (typeof window === 'undefined') return []
-            return [<LangDropdown />, <ThemeDropdown />]
+            return [<LangDropdown {...props} />, <ThemeDropdown />]
           }}
           headerTitleRender={(logo, title, _) => {
             const defaultDom = (

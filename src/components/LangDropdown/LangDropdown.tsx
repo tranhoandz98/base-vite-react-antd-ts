@@ -1,7 +1,7 @@
 import { locales } from '@/i18n/i18n'
+import { ProLayoutProps } from '@ant-design/pro-components'
 import { Button, Dropdown } from 'antd'
 import Flags from 'country-flag-icons/react/3x2'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface ItemProps {
@@ -12,9 +12,12 @@ interface ItemProps {
   onClick: (e: any) => void
 }
 
-export default function LangDropdown() {
+export default function LangDropdown(props: ProLayoutProps) {
   const { i18n } = useTranslation()
-  const currentLanguage = locales[i18n.language as keyof typeof locales]
+  const keyLocale = i18n.language as keyof typeof locales
+  const currentLanguage = locales[keyLocale]
+
+  const { collapsed, layout } = props
 
   const items: ItemProps[] = [
     {
@@ -34,18 +37,17 @@ export default function LangDropdown() {
       }
     }
   ]
-  const [dataDropdown, setDataDropdown] = useState<ItemProps>(items[0])
+
+  const dataDropdown = items.find((itemT) => itemT?.key === keyLocale) as ItemProps
 
   const changeLanguage = (lng: 'en' | 'vi') => {
     i18n.changeLanguage(lng)
-    const itemTheme = items.find((itemT) => itemT?.key === lng) as ItemProps
-    setDataDropdown(itemTheme)
   }
 
   return (
     <Dropdown className='border-transparent' menu={{ items, selectedKeys: [currentLanguage] }} placement='bottomRight'>
-      <Button type='text' icon={dataDropdown.icon}>
-        {currentLanguage}
+      <Button type='text' icon={dataDropdown?.icon}>
+        {layout === 'side' ? <>{!collapsed && currentLanguage}</> : <>{currentLanguage}</>}
       </Button>
     </Dropdown>
   )

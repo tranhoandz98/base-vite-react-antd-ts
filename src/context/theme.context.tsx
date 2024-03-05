@@ -18,13 +18,12 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   // setState
   const [themeBase, setThemeBase] = useState<NavThemeDropdownProps>(initialThemeContext.themeBase)
 
-  const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   const rawSetTheme = (rawTheme: NavThemeDropdownProps) => {
     const root = window.document.documentElement
 
     let theme = rawTheme
     if (rawTheme === 'system') {
-      if (userPrefersDark) {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         theme = 'realDark'
       } else {
         theme = 'light'
@@ -42,8 +41,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     rawSetTheme(themeBase)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [themeBase, userPrefersDark])
+  }, [themeBase])
 
   return <ThemeContext.Provider value={{ themeBase, setThemeBase }}>{children}</ThemeContext.Provider>
 }
