@@ -8,7 +8,7 @@ const FooterMain: React.FC = () => {
       //     background: 'none',
       //   }}
       prefixCls=''
-      copyright='tranhoandz99'
+      copyright='tranhoandz98'
       //   links={[
       //     {
       //       key: 'github',

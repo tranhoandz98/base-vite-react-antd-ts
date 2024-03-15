@@ -1,16 +1,11 @@
 import { routerMain } from '@/constants/routerMain'
+import { Flex } from 'antd'
 import { Link } from 'react-router-dom'
 
 export default function MainLogo() {
   return (
     <Link to={routerMain.HOME}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '5px'
-        }}
-      >
+      <Flex align='center' gap={'small'}>
         <img
           width='auto'
           height={22}
@@ -18,7 +13,7 @@ export default function MainLogo() {
           alt='logo'
         />
         <h1>Ant Design Pro</h1>
-      </div>
+      </Flex>
     </Link>
   )
 }

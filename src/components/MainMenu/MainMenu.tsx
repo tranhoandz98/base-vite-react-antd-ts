@@ -1,74 +1,18 @@
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  MailOutlined,
-  SettingOutlined
-} from '@ant-design/icons'
-import React from 'react'
-
 import { routerMain } from '@/constants/routerMain'
-import { ChromeFilled, CrownFilled, FileOutlined, HomeOutlined, TagOutlined } from '@ant-design/icons'
-import { Menu, type MenuProps } from 'antd'
+import { CrownFilled, FileOutlined, HomeOutlined, TagOutlined } from '@ant-design/icons'
+import { Menu } from 'antd'
+import React, { ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import MenuItemType from './types/menu.type'
 
-type MenuItem = Required<MenuProps>['items'][number]
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: 'group'
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type
-  } as MenuItem
-}
-
-export default function MainMenu() {
+const MainMenu: React.FC = () => {
   const { t } = useTranslation('')
 
-  const navigate = useNavigate()
+  // get current location
+  const location = useLocation()
 
-  const onClick: MenuProps['onClick'] = (e) => {
-    navigate(e.key)
-    console.log('click ', e)
-  }
-
-  const items: MenuProps['items'] = [
-    getItem(t('menu.dashboard'), routerMain.DASHBOARD, <HomeOutlined />),
-    getItem(t('menu.blog'), routerMain.BLOG, <FileOutlined />),
-
-    getItem( t('menu.component'), routerMain.COMPONENT, <TagOutlined />, [
-      getItem(t('menu.form'), `${routerMain.COMPONENT}/form`, <CrownFilled />),
-      getItem(t('menu.table'), `${routerMain.COMPONENT}/table`, <CrownFilled />),
-      getItem(t('menu.modal'), `${routerMain.COMPONENT}/modal`, <CrownFilled />),
-      getItem(t('menu.skeleton'), `${routerMain.COMPONENT}/skeleton`, <CrownFilled />)
-    ]),
-
-    getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-      getItem('Option 5', '5'),
-      getItem('Option 6', '6'),
-      getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')])
-    ]),
-
-    { type: 'divider' },
-
-    // getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group')
-  ]
-
-  const defaultMenu = [
+  const menuData: MenuItemType[] = [
     {
       path: routerMain.DASHBOARD,
       label: t('menu.dashboard'),
@@ -82,26 +26,55 @@ export default function MainMenu() {
     {
       label: t('menu.component'),
       icon: <TagOutlined />,
-      path: routerMain.COMPONENT,
       children: [
         {
           path: `${routerMain.COMPONENT}/form`,
-          label: t('menu.form'),
-          icon: <CrownFilled />
+          label: t('menu.form')
         },
         {
           path: `${routerMain.COMPONENT}/table`,
-          label: t('menu.table'),
-          icon: <CrownFilled />
+          label: t('menu.table')
         },
         {
           path: `${routerMain.COMPONENT}/modal`,
-          label: t('menu.modal'),
-          icon: <CrownFilled />
+          label: t('menu.modal')
         },
         {
           path: `${routerMain.COMPONENT}/skeleton`,
-          label: t('menu.skeleton'),
+          label: t('menu.skeleton')
+        }
+      ]
+    },
+    {
+      label: 'Menu 1',
+      icon: <TagOutlined />,
+      children: [
+        {
+          label: 'Menu 1.1',
+          icon: <CrownFilled />,
+          children: [
+            {
+              label: 'Menu 1.1.1',
+              icon: <CrownFilled />
+            },
+            {
+              label: 'Menu 1.1.2',
+              icon: <CrownFilled />
+            },
+            {
+              label: 'Menu 1.1.3',
+              icon: <CrownFilled />
+            }
+          ]
+        },
+        {
+          path: '/list/sub-page2',
+          label: 'Secondary list page',
+          icon: <CrownFilled />
+        },
+        {
+          path: '/list/sub-page3',
+          label: 'Level 3 list page',
           icon: <CrownFilled />
         }
       ]
@@ -141,10 +114,106 @@ export default function MainMenu() {
       ]
     },
     {
-      path: 'https://ant.design',
-      label: 'Ant Design Official website external link',
-      icon: <ChromeFilled />
+      label: 'Menu 1',
+      icon: <TagOutlined />,
+      children: [
+        {
+          label: 'Menu 1.1',
+          icon: <CrownFilled />,
+          children: [
+            {
+              label: 'Menu 1.1.1',
+              icon: <CrownFilled />
+            },
+            {
+              label: 'Menu 1.1.2',
+              icon: <CrownFilled />
+            },
+            {
+              label: 'Menu 1.1.3',
+              icon: <CrownFilled />
+            }
+          ]
+        },
+        {
+          path: '/list/sub-page2',
+          label: 'Secondary list page',
+          icon: <CrownFilled />
+        },
+        {
+          path: '/list/sub-page3',
+          label: 'Level 3 list page',
+          icon: <CrownFilled />
+        }
+      ]
     }
+    //...
   ]
-  return <Menu onClick={onClick} defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode='inline' items={items} />
+
+  const [selectedKeys, setSelectedKeys] = useState([location.pathname])
+
+  // define default open keys
+  let defaultOpenKeys: string[] = []
+  if (location.pathname.includes('component')) {
+    defaultOpenKeys = [routerMain.COMPONENT]
+  }
+
+  const [openKeys, setOpenKeys] = useState(defaultOpenKeys)
+
+  // handle select menu
+  const handleSelect = ({ key }: { key: string }) => {
+    setSelectedKeys([key])
+    if (key.includes('component')) openKeys.push(key)
+    setOpenKeys(openKeys)
+  }
+
+  function renderItem(item: MenuItemType): ReactNode {
+    const label = item.path ? <Link to={item.path}>{item.label}</Link> : item.label
+    const keyMenu = item.path || item.label
+ 
+    if (item.children) {
+      // if (item.path) {
+      //   return (
+      //     <Menu.SubMenu key={keyMenu} icon={item.icon} title={label}>
+      //       {item.children.map(renderItem)}
+      //     </Menu.SubMenu>
+      //   )
+      // } else {
+      //   return (
+      //     <Menu.ItemGroup key={keyMenu} title={label}>
+      //       {item.children.map(renderItem)}
+      //     </Menu.ItemGroup> 
+      //   )
+      // }
+      return (
+        <Menu.SubMenu key={keyMenu} icon={item.icon} title={label}>
+          {item.children.map(renderItem)}
+        </Menu.SubMenu>
+      )
+    }
+
+    return (
+      <Menu.Item key={keyMenu} icon={item.icon}>
+        {label}
+      </Menu.Item>
+    )
+  }
+
+  // và bạn có thể sử dụng nó như sau:
+
+  return (
+    <Menu
+      mode='inline'
+      selectedKeys={selectedKeys}
+      defaultSelectedKeys={selectedKeys}
+      openKeys={openKeys}
+      defaultOpenKeys={openKeys}
+      onSelect={handleSelect}
+      onOpenChange={setOpenKeys}
+    >
+      {menuData.map((i) => renderItem(i))}
+    </Menu>
+  )
 }
+
+export default MainMenu

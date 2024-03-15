@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoute'
 import RejectedRoute from './RejectedRoute'
 import { Suspense, lazy } from 'react'
 import ComponentCs from '@/pages/ComponentCs'
+import SpinnerLoading from '@/components/SpinnerLoading'
 
 export default function useRouterElements() {
   const Login = lazy(() => import('@/pages/Login'))
@@ -41,7 +42,7 @@ export default function useRouterElements() {
             {
               path: routerMain.BLOG,
               element: (
-                <Suspense>
+                <Suspense fallback={<SpinnerLoading />}>
                   <Blog />
                 </Suspense>
               )
@@ -49,7 +50,7 @@ export default function useRouterElements() {
             {
               path: routerMain.DASHBOARD,
               element: (
-                <Suspense>
+                <Suspense fallback={<SpinnerLoading />}>
                   <Dashboard />
                 </Suspense>
               )
@@ -60,7 +61,7 @@ export default function useRouterElements() {
                 {
                   path: routerMain.COMPONENT_SUB,
                   element: (
-                    <Suspense>
+                    <Suspense fallback={<SpinnerLoading />}>
                       <ComponentCs />
                     </Suspense>
                   )
