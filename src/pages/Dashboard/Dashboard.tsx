@@ -1,25 +1,29 @@
-import { PageContainer, ProCard } from '@ant-design/pro-components'
-import { Button } from 'antd'
+import { ProCard } from '@ant-design/pro-components'
+import { Typography } from 'antd'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 export default function Dashboard() {
   const { t } = useTranslation()
 
+  const { Title } = Typography
   return (
-    <div>
-      <PageContainer
-        token={{}}
-        extra={[
-          <Button key='3'>Test</Button>,
-          <Button key='1' type='primary'>
-            Add
-          </Button>
-        ]}
-        title={t('menu.dashboard')}
-        subTitle='simple description'
-      >
-        <ProCard className='min-h-[500px] h-[50vh]'>{t('menu.dashboard')}</ProCard>
-      </PageContainer>
-    </div>
+    <>
+      <Title level={3}>Bảng điều khiển</Title>
+      <ProCard className='min-h-[500px] h-[50vh]'>
+        {t('menu.dashboard')}
+
+        <p>long content</p>
+        {
+          // indicates very long content
+          Array.from({ length: 100 }, (_, index) => (
+            <React.Fragment key={index}>
+              {index % 20 === 0 && index ? 'more' : '...'}
+              <br />
+            </React.Fragment>
+          ))
+        }
+      </ProCard>
+    </>
   )
 }

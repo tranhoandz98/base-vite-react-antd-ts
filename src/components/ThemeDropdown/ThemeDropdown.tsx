@@ -24,7 +24,7 @@ export default function ThemeDropdown() {
       }
     },
     {
-      key: 'realDark',
+      key: 'dark',
       icon: <MoonOutlined />,
       label: <span>Dark</span>,
       onClick: (e) => {

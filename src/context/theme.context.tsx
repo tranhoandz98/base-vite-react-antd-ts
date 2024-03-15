@@ -1,15 +1,17 @@
-import { NavThemeDropdownProps } from '@/types/theme.type'
+import { NavThemeDropdownProps, NavThemeProps } from '@/types/theme.type'
 import { getThemeFromLS, setThemeToLs } from '@/utils/utils'
 import React, { createContext, useState } from 'react'
 
 interface ThemeContextInterface {
   themeBase: NavThemeDropdownProps
   setThemeBase: React.Dispatch<React.SetStateAction<NavThemeDropdownProps>>
+  skinBase: NavThemeProps
 }
 
 const initialThemeContext: ThemeContextInterface = {
   themeBase: getThemeFromLS(),
-  setThemeBase: () => null
+  setThemeBase: () => null,
+  skinBase: getThemeFromLS()
 }
 
 export const ThemeContext = createContext(initialThemeContext)
@@ -17,25 +19,20 @@ export const ThemeContext = createContext(initialThemeContext)
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   // setState
   const [themeBase, setThemeBase] = useState<NavThemeDropdownProps>(initialThemeContext.themeBase)
+  const [skinBase, setSkinBase] = useState<NavThemeProps>(initialThemeContext.skinBase)
 
   const rawSetTheme = (rawTheme: NavThemeDropdownProps) => {
-    const root = window.document.documentElement
-
     let theme = rawTheme
     if (rawTheme === 'system') {
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        theme = 'realDark'
+        theme = 'dark'
       } else {
         theme = 'light'
       }
     }
-    const isDark = theme === 'realDark'
-    const twClassDark = theme === 'realDark' ? 'dark' : theme
-
-    root.classList.remove(isDark ? 'light' : 'dark')
-    root.classList.add(twClassDark)
 
     setThemeToLs(theme)
+    setSkinBase(theme as NavThemeProps)
     localStorage.setItem('color-theme', theme)
   }
 
@@ -43,5 +40,5 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     rawSetTheme(themeBase)
   }, [themeBase])
 
-  return <ThemeContext.Provider value={{ themeBase, setThemeBase }}>{children}</ThemeContext.Provider>
+  return <ThemeContext.Provider value={{ themeBase, setThemeBase, skinBase }}>{children}</ThemeContext.Provider>
 }

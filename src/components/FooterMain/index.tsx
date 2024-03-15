@@ -1,7 +1,7 @@
 import { DefaultFooter } from '@ant-design/pro-components'
 import React from 'react'
 
-const Footer: React.FC = () => {
+const FooterMain: React.FC = () => {
   return (
     <DefaultFooter
       //   style={{
@@ -27,4 +27,4 @@ const Footer: React.FC = () => {
   )
 }
 
-export default Footer
+export default FooterMain

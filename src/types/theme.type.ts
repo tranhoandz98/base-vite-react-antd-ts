@@ -1,2 +1,2 @@
-export type NavThemeProps = 'light' | 'realDark'
-export type NavThemeDropdownProps = 'light' | 'realDark' | 'system'
+export type NavThemeProps = 'light' | 'dark'
+export type NavThemeDropdownProps = 'light' | 'dark' | 'system'

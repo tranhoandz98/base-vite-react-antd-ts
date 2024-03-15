@@ -1,1 +1,5 @@
-export const themeGlobal = {} as const
+export const themeGlobal = {
+  heightHeader: 56,
+  sideBarWidth: 200,
+  sideBarIconWidth: 65
+} as const

@@ -7,7 +7,7 @@ export const setAccessTokenToLS = (access_token: string) => {
 }
 
 export const getAccessTokenFromLS = () => {
-  return localStorage.getItem('access_token') || ''
+  return localStorage.getItem('access_token') || '11'
 }
 
 export const clearAuthFromLS = () => {
