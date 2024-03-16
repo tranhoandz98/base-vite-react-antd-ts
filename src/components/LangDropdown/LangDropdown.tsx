@@ -1,7 +1,10 @@
+import defaultSettings from '@/config/defaultSettings'
+import { ThemeContext } from '@/context/theme.context'
 import { locales } from '@/i18n/i18n'
 import { ProLayoutProps } from '@ant-design/pro-components'
 import { Button, Dropdown } from 'antd'
 import Flags from 'country-flag-icons/react/3x2'
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface ItemProps {
@@ -12,12 +15,12 @@ interface ItemProps {
   onClick: (e: any) => void
 }
 
-export default function LangDropdown(props: ProLayoutProps) {
+export default function LangDropdown() {
   const { i18n } = useTranslation()
   const keyLocale = i18n.language as keyof typeof locales
   const currentLanguage = locales[keyLocale]
 
-  const { collapsed, layout } = props
+  const { collapsed } = useContext(ThemeContext)
 
   const items: ItemProps[] = [
     {
@@ -45,9 +48,9 @@ export default function LangDropdown(props: ProLayoutProps) {
   }
 
   return (
-    <Dropdown className='border-transparent' menu={{ items, selectedKeys: [currentLanguage] }} placement='bottomRight'>
+    <Dropdown menu={{ items, selectedKeys: [currentLanguage] }} placement='bottomRight'>
       <Button type='text' icon={dataDropdown?.icon}>
-        {layout === 'side' ? <>{!collapsed && currentLanguage}</> : <>{currentLanguage}</>}
+        {defaultSettings.layout === 'sidebar' ? <>{collapsed ? '' : currentLanguage}</> : <>{currentLanguage}</>}
       </Button>
     </Dropdown>
   )

@@ -1,5 +1,4 @@
-import { ProCard } from '@ant-design/pro-components'
-import { Typography } from 'antd'
+import { Card, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 export default function Blog() {
@@ -7,9 +6,9 @@ export default function Blog() {
 
   return (
     <>
-      <Typography.Title level={3}>Bảng điều khiển</Typography.Title>
+      <Typography.Title level={3}>Blog</Typography.Title>
 
-      <ProCard className='min-h-[500px] h-[50vh]'></ProCard>
+      <Card className='min-h-[500px] h-[50vh]'></Card>
     </>
   )
 }

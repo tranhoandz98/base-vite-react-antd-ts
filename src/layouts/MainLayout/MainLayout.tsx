@@ -2,42 +2,57 @@ import ContentMain from '@/components/ContentMain/ContentMain'
 import FooterMain from '@/components/FooterMain'
 import HeaderMain from '@/components/HeaderMain'
 import SideBar from '@/components/SideBar'
-import { themeGlobal } from '@/constants/themeGlobal'
-import { Layout } from 'antd'
-import clsx from 'clsx'
+import defaultSettings from '@/config/defaultSettings'
+import { FloatButton, Layout } from 'antd'
 import { Outlet } from 'react-router-dom'
 
 export default function MainLayout() {
-  // const useStyles = createStyles(({ token }) => {
-  //   return {
-  //     container: {
-  //       background: `linear-gradient(#ffffff, #f5f5f5 28%);`,
-  //       // pointerEvents: 'none',
-  //       position: 'fixed',
-  //       overflow: 'hidden',
-  //       insetBlockStart: 0,
-  //       insetInlineStart: 0,
-  //       zIndex: 0,
-  //       height: '100%',
-  //       width: '100%'
-  //     }
-  //   }
-  // })
+  const LayoutC = {
+    top: (
+      <>
+        <Layout>
+          <HeaderMain />
+          <ContentMain>
+            <Outlet />
+          </ContentMain>
+          <FooterMain />
+          <FloatButton.BackTop />
+        </Layout>
+      </>
+    ),
+    sidebar: (
+      <>
+        <Layout>
+          <SideBar />
+          <Layout>
+            <ContentMain>
+              <Outlet />
+            </ContentMain>
+            <FooterMain />
+          </Layout>
+          <FloatButton.BackTop />
+        </Layout>
+      </>
+    ),
+    mix: (
+      <>
+        <Layout>
+          <HeaderMain />
+          <Layout>
+            <SideBar />
+            <Layout>
+              <ContentMain>
+                <Outlet />
+              </ContentMain>
+            </Layout>
+          </Layout>
+          <FooterMain />
+          <FloatButton.BackTop />
+        </Layout>
+      </>
+    )
+  }
 
-  return (
-    <Layout
-      style={{
-        background: `linear-gradient(#ffffff, #f5f5f5 28%);`
-      }}
-    >
-      <HeaderMain />
-      <Layout>
-        <SideBar />
-        <ContentMain>
-          <Outlet />
-        </ContentMain>
-      </Layout>
-      <FooterMain />
-    </Layout>
-  )
+  const genderLayout = LayoutC[defaultSettings.layout] || LayoutC.mix
+  return genderLayout
 }

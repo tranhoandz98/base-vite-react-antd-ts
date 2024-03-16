@@ -6,6 +6,7 @@ import { ThemeContext } from './context/theme.context'
 import { localesAntd } from './i18n/i18n'
 import AppRouter from './routers/AppRouter'
 import { LocalStorageEventTarget } from './utils/auth'
+import defaultSettings from './config/defaultSettings'
 
 const App: React.FC = () => {
   const { reset } = useContext(AppContext)
@@ -24,7 +25,7 @@ const App: React.FC = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#9f1d21'
+          colorPrimary: defaultSettings.colorPrimary
         },
         // cssVar: true,
         hashed: false,

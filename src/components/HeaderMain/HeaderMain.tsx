@@ -4,6 +4,9 @@ import AvatarDropdown from '../AvatarDropdown'
 import LangDropdown from '../LangDropdown'
 import ThemeDropdown from '../ThemeDropdown'
 import MainLogo from '../MainLogo/MainLogo'
+import defaultSettings from '@/config/defaultSettings'
+import MainMenu from '../MainMenu'
+import ActionRightMenu from '../ActionRightMenu'
 
 export default function HeaderMain() {
   const { Header } = Layout
@@ -16,7 +19,7 @@ export default function HeaderMain() {
         boxShadow: `${token.boxShadowTertiary}`,
         height: `${themeGlobal.heightHeader}px`,
         display: 'flex',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         alignItems: 'center',
         position: 'sticky',
         width: '100%',
@@ -29,12 +32,10 @@ export default function HeaderMain() {
       }}
     >
       <MainLogo />
-
-      <Space>
-        <LangDropdown />
-        <ThemeDropdown />
-        <AvatarDropdown />
-      </Space>
+      {defaultSettings.layout === 'top' && <MainMenu mode='horizontal' />}
+      <div style={{ marginLeft: 'auto' }}>
+        <ActionRightMenu />
+      </div>
     </Header>
   )
 }

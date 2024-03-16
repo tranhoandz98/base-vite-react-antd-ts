@@ -1,4 +1,4 @@
-import { Avatar, Dropdown } from 'antd'
+import { Avatar, Button, Dropdown } from 'antd'
 
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
@@ -31,10 +31,12 @@ export default function AvatarDropdown() {
       }}
       placement='bottomRight'
     >
-      <Avatar
-        src='https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg'
-        size={'small'}
-      />
+      <div>
+        <Avatar
+          src='https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg'
+          size={'small'}
+        />
+      </div>
     </Dropdown>
   )
 }

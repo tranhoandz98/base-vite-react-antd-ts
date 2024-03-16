@@ -1,5 +1,4 @@
-import { ProCard } from '@ant-design/pro-components'
-import { Typography } from 'antd'
+import { Card, Typography } from 'antd'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -10,7 +9,7 @@ export default function Dashboard() {
   return (
     <>
       <Title level={3}>Bảng điều khiển</Title>
-      <ProCard className='min-h-[500px] h-[50vh]'>
+      <Card className='min-h-[500px] h-[50vh]'>
         {t('menu.dashboard')}
 
         <p>long content</p>
@@ -23,7 +22,7 @@ export default function Dashboard() {
             </React.Fragment>
           ))
         }
-      </ProCard>
+      </Card>
     </>
   )
 }
