@@ -1,12 +1,11 @@
 import defaultSettings from '@/config/defaultSettings'
 import { ThemeContext } from '@/context/theme.context'
 import { locales } from '@/i18n/i18n'
-import { ProLayoutProps } from '@ant-design/pro-components'
-import { Button, Dropdown } from 'antd'
+import { Button, Dropdown, Space } from 'antd'
 import Flags from 'country-flag-icons/react/3x2'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import clsx from 'clsx'
 interface ItemProps {
   key: string
   icon: JSX.Element
@@ -26,7 +25,7 @@ export default function LangDropdown() {
     {
       key: 'vi',
       icon: <Flags.VN width='1rem' />,
-      label: <span>Tiếng Việt</span>,
+      label: <span>VI</span>,
       onClick: (e) => {
         changeLanguage(e.key)
       }
@@ -34,7 +33,7 @@ export default function LangDropdown() {
     {
       key: 'en',
       icon: <Flags.US width='1rem' />,
-      label: <span>English</span>,
+      label: <span>EN</span>,
       onClick: (e) => {
         changeLanguage(e.key)
       }
@@ -49,9 +48,19 @@ export default function LangDropdown() {
 
   return (
     <Dropdown menu={{ items, selectedKeys: [currentLanguage] }} placement='bottomRight'>
-      <Button type='text' icon={dataDropdown?.icon}>
-        {defaultSettings.layout === 'sidebar' ? <>{collapsed ? '' : currentLanguage}</> : <>{currentLanguage}</>}
-      </Button>
+      {defaultSettings.layout === 'sidebar' ? (
+        <div
+          className={clsx({
+            'ant-btn ant-btn-text ant-btn-icon-only ant-dropdown-trigger border-transparent': true
+          })}
+        >
+          <span>{dataDropdown?.icon}</span>
+        </div>
+      ) : (
+        <Button type='text' icon={dataDropdown?.icon}>
+          <>{currentLanguage}</>
+        </Button>
+      )}
     </Dropdown>
   )
 }

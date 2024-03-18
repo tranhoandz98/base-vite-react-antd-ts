@@ -7,8 +7,8 @@ import detector from 'i18next-browser-languagedetector'
 import enUSIntl from 'antd/lib/locale/en_US'
 
 export const locales = {
-  en: 'English',
-  vi: 'Tiếng Việt'
+  en: 'EN',
+  vi: 'VI'
 } as const
 
 export const localesAntd = {

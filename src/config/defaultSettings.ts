@@ -5,7 +5,7 @@ type config = {
 
 const defaultSettings: config = {
   colorPrimary: '#9F1C21',
-  layout: 'sidebar'
+  layout: 'mix'
 } as const
 
 export default defaultSettings
