@@ -1,16 +1,21 @@
-/* Cho tất cả các trình duyệt */
+/* width */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
-/* Đối tượng cuộn */
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #c1c1c1;
     border-radius: 4px;
 }
 
-/* Đối tượng cuộn khi hover */
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(165, 165, 165);
+    background: #a8a8a8;
 }
-
