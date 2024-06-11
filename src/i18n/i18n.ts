@@ -57,7 +57,7 @@ i18n
     fallbackLng: 'vi',
     defaultNS,
     nsSeparator: false,
-    keySeparator: false,
+    // keySeparator: false,
     resources
   })
 
