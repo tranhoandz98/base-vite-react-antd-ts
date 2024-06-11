@@ -8,7 +8,7 @@ export const setThemeToLs = (theme: NavThemeDropdownProps) => {
 }
 
 export const getThemeFromLS = () => {
-  return (localStorage.getItem('color-theme') || 'light') as NavThemeDropdownProps
+  return (localStorage.getItem('color-theme') || 'light') as NavThemeProps
 }
 
 export function isAxiosError<T>(error: unknown): error is AxiosError<T> {

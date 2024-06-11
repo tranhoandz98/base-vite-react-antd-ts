@@ -5,7 +5,7 @@ export default function Login() {
     <div>
       <PageContainer
         header={{
-          title: 'Dashbroad'
+          title: 'Login'
         }}
       >
         <ProCard direction='column' ghost gutter={[0, 16]}>
